@@ -1,0 +1,48 @@
+NUMBER COMPLIMENT
+The complement of an integer is the integer you get when you flip all the 0's to 1's and all the 1's to 0's in its binary representation.
+
+For example, The integer 5 is "101" in binary and its complement is "010" which is the integer 2.
+Given an integer num, return its complement.
+
+import 'dart:math';
+
+void main() {
+  int numb = 1;
+
+  findComplementOf(numb);
+}
+
+findComplementOf(int num) {
+  int rem = 0;
+  double temp = 0.0;
+  List<int> binaryValue = [];
+  while (num > 0) {
+    rem = num % 2;
+    temp = num / 2;
+    num = temp.toInt();
+    int complimented = (rem == 0) ? 1 : 0;
+    binaryValue.add(complimented);
+  }
+
+  List<int> binaryValues = binaryValue.reversed.toList();
+  for (var i = 0; i < binaryValues.length; i++) {
+    if (binaryValues[i] == 0 &&
+        binaryValues.length > 1 &&
+        binaryValues[i + 1] == 1) {
+      binaryValues.removeAt(i);
+      i = binaryValues.length;
+    } else {
+      i = binaryValues.length;
+    }
+  }
+
+  print(binaryValues);
+
+  int decimalValue = 0;
+  for (var i = 0; i < binaryValues.length; i++) {
+    decimalValue +=
+        ((binaryValues[binaryValues.length - (i + 1)]) * (pow(2, i))).toInt();
+  }
+
+  print(decimalValue);
+}
